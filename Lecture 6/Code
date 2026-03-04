@@ -1,1 +1,75 @@
-
+//Left Motor
+int Ena=9;
+int in1=2;
+int in2=3;
+//Right Motor
+int Enb=10;
+int in3=4;
+int in4=5;
+void setup() {
+// Put your setup code here, to run once:
+Serial.begin(9600);
+pinMode(Ena,OUTPUT);
+pinMode(Enb,OUTPUT);
+pinMode(in1,OUTPUT);
+pinMode(in2,OUTPUT);
+pinMode(in3,OUTPUT);
+pinMode(in4,OUTPUT);
+}
+void loop() {
+// Put your main code here, to run repeatedly:
+if(Serial.available() >0 ){
+char data=Serial.read();
+if(data == 'F'){
+forward();
+}
+else if(data == 'B'){
+backward();
+}
+else if(data == 'S'){
+stop();
+}
+else if(data == 'R'){
+turnRight();
+}
+else if (data == 'L'){
+turnLeft();
+}
+}
+}
+void forward(){
+digitalWrite(in1,HIGH);
+digitalWrite(in2,LOW);
+analogWrite(Ena,128);
+digitalWrite(in3,LOW);
+digitalWrite(in4,HIGH);
+analogWrite(Enb,128);
+}
+void backward(){
+digitalWrite(in1,LOW);
+digitalWrite(in2,HIGH);
+analogWrite(Ena,128);
+digitalWrite(in3,HIGH);
+digitalWrite(in4,LOW);
+analogWrite(Enb,128);
+}
+void turnRight(){
+digitalWrite(in1,LOW);
+digitalWrite(in2,HIGH);
+analogWrite(Ena,128);
+digitalWrite(in3,LOW);
+digitalWrite(in4,HIGH);
+analogWrite(Enb,128);
+}
+void turnLeft(){
+digitalWrite(in1,HIGH);
+digitalWrite(in2,LOW);
+analogWrite(Ena,128);
+digitalWrite(in3,HIGH);
+digitalWrite(in4,LOW);
+analogWrite(Enb,128);
+}
+void stop(){
+analogWrite(Ena,0);
+analogWrite(Enb,0); 
+}
